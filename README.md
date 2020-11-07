@@ -1,1 +1,1 @@
-DeepLearning_vs_DeepReinforcementLearning
+Playing-Atari-Deep-Learning-vs-Deep-Reinforcement-Learning
