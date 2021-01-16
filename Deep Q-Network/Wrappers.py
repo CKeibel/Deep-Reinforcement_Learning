@@ -190,4 +190,5 @@ def make_env(env_name):
     env = ClipRewardEnv(env)
     env = WarpFrame(env)
     env = FrameStack(env)
+
     return env
