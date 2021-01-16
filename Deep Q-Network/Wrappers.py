@@ -183,7 +183,7 @@ def make_env(env_name):
     #if 'FIRE' in env.unwrapped.get_action_meanings():
     #    env = FireResetEnv(env)
     #    print("DONE")
-    env = EpisodicLifeEnv(env)
+    #env = EpisodicLifeEnv(env)
     env = MaxAndSkipEnv(env)
     env = ScaledFloatFrame(env)
     env = NoopResetEnv(env)
