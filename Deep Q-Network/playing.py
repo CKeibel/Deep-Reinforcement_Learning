@@ -26,7 +26,7 @@ def save_frames_as_gif(frames, path='./', filename='gym_animation.gif'):
         patch.set_data(frames[i])
 
     anim = animation.FuncAnimation(plt.gcf(), animate, frames = len(frames), interval=50)
-    anim.save(path + filename, writer='imagemagick', fps=60)
+    anim.save(path + filename, writer='imagemagick', fps=10)
 
 """ Deep Q-Network """
 # Funktion zum erstellen eines neuronalen Netzes
@@ -52,7 +52,8 @@ def build_neural_net(INPUT_SHAPE, OUTPUT_SHAPE, LOSS_FUNCTION, OPTIMIZER):
 """ Environment """
 # Create Environment
 from Wrappers import make_env
-env = make_env("Pong-v0")
+game = "MsPacman-v0"
+env = make_env(game)
 
 """ DQN Parameters"""
 # DQN und Tagret Net Parameters
@@ -62,7 +63,7 @@ LOSS_FUNCTION = Huber()
 OPTIMIZER = RMSprop(learning_rate=0.00025, rho=0.95, epsilon=0.01)
 
 DQN = build_neural_net(INPUT_SHAPE, OUTPUT_SHAPE, LOSS_FUNCTION, OPTIMIZER)
-DQN.load_weights("WEIGHTS/Pong-v0_DQN_Ep_13058.h5")
+DQN.load_weights("weights/MsPacman/NoEpisodicLife/MsPacman-v0_DQN_Ep_13838.h5")
 
 
 """ Playing """
@@ -77,8 +78,7 @@ for i in range(EPISODES):
         frames.append(env.render(mode="rgb_array"))
         action = np.argmax(DQN.predict(state))
         state, reward, done, info = env.step(action)
-        #env.render()
-        #time.sleep(.1)
+
         
 env.close()
-save_frames_as_gif(frames)
+save_frames_as_gif(frames, filename= game + ".gif")
